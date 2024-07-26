@@ -1,0 +1,35 @@
+import os
+from openpyxl import Workbook
+
+# Ruta de la carpeta que quieres recorrer
+carpeta = r'C:\Users\Usuario\Desktop\Documentacion'
+
+# Comprobar si la carpeta existe
+if not os.path.exists(carpeta):
+    print(f"La carpeta {carpeta} no existe. Verifica la ruta.")
+else:
+    # Crear un nuevo libro de Excel
+    wb = Workbook()
+    ws = wb.active
+
+    # Escribir encabezado en la primera fila
+    ws.append(['Nombre de Archivo'])
+
+    # Contador de archivos
+    contador = 0
+
+    # Recorrer todos los archivos en la carpeta
+    for nombre_archivo in os.listdir(carpeta):
+        ruta_completa = os.path.join(carpeta, nombre_archivo)
+        if os.path.isfile(ruta_completa):
+            # Escribir el nombre del archivo en una nueva fila
+            ws.append([nombre_archivo])
+            contador += 1
+
+    if contador == 0:
+        print("No se encontraron archivos en la carpeta.")
+    else:
+        # Guardar el archivo de Excel
+        archivo_excel = 'nombres_archivos.xlsx'
+        wb.save(archivo_excel)
+        print(f'Se ha creado el archivo {archivo_excel} con los nombres de {contador} archivos de la carpeta {carpeta}.')
