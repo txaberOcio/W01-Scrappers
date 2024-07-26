@@ -105,7 +105,7 @@ def ObtenerImagen(imagen_url):
             return None
     except Exception as e:
         print(f"Error obteniendo imagen desde {imagen_url}: {e}")
-        return None
+        return None 
 
 def GuardarImagen(imagen, sku, imagenes_destino):
     try:
